@@ -1,4 +1,11 @@
-FROM apache/airflow:2.6.0
+FROM apache/airflow:2.10.5
 USER root
+RUN apt-get update && \
+    apt-get install -y curl && \
+    mkdir -p /opt/airflow/logs/scheduler /opt/airflow/logs/webserver /opt/airflow/dags && \
+    chown -R airflow:root /opt/airflow && \
+    chmod -R 775 /opt/airflow && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 USER airflow
-RUN pip install great-expectations psycopg2-binary sqlalchemy<2.0.0
+RUN pip install great_expectations psycopg2-binary "sqlalchemy<2.0.0"

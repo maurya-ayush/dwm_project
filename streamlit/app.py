@@ -6,8 +6,8 @@ import plotly.express as px
 # Database connection
 def get_connection():
     return psycopg2.connect(
-        dbname="dq_db", user="dq_user",
-        password="dq_pass", host="postgres"
+        dbname="airflow", user="airflow",
+        password="airflow", host="postgres"
     )
 
 # Dashboard layout
