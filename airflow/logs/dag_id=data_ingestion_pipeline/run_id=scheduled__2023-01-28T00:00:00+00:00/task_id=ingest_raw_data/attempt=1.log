@@ -1,0 +1,186 @@
+[2025-03-31T12:02:31.686+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [queued]>
+[2025-03-31T12:02:31.691+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [queued]>
+[2025-03-31T12:02:31.691+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:02:31.691+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2025-03-31T12:02:31.691+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:02:31.698+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): ingest_raw_data> on 2023-01-28 00:00:00+00:00
+[2025-03-31T12:02:31.700+0000] {standard_task_runner.py:55} INFO - Started process 1117 to run task
+[2025-03-31T12:02:31.702+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'data_ingestion_pipeline', 'ingest_raw_data', 'scheduled__2023-01-28T00:00:00+00:00', '--job-id', '69', '--raw', '--subdir', 'DAGS_FOLDER/data_pipeline.py', '--cfg-path', '/tmp/tmp6wzb79tj']
+[2025-03-31T12:02:31.703+0000] {standard_task_runner.py:83} INFO - Job 69: Subtask ingest_raw_data
+[2025-03-31T12:02:31.736+0000] {task_command.py:388} INFO - Running <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [running]> on host 1d0e81057fe9
+[2025-03-31T12:02:31.841+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=data_ingestion_pipeline
+AIRFLOW_CTX_TASK_ID=ingest_raw_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-28T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-01-28T00:00:00+00:00
+[2025-03-31T12:02:31.846+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2056, in execute
+    cur.execute(*args, **kwargs)
+psycopg2.errors.UndefinedTable: relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_pipeline.py", line 22, in ingest_raw_data
+    df.to_sql('raw_sales', conn, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/generic.py", line 2882, in to_sql
+    method=method,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 728, in to_sql
+    **engine_kwargs,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2225, in to_sql
+    table.create()
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 856, in create
+    if self.exists():
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 840, in exists
+    return self.pd_sql.has_table(self.name, self.schema)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2236, in has_table
+    return len(self.execute(query, [name]).fetchall()) > 0
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2068, in execute
+    raise ex from exc
+pandas.io.sql.DatabaseError: Execution failed on sql 'SELECT name FROM sqlite_master WHERE type='table' AND name=?;': relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+
+[2025-03-31T12:02:31.852+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=data_ingestion_pipeline, task_id=ingest_raw_data, execution_date=20230128T000000, start_date=20250331T120231, end_date=20250331T120231
+[2025-03-31T12:02:31.857+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 69 for task ingest_raw_data (Execution failed on sql 'SELECT name FROM sqlite_master WHERE type='table' AND name=?;': relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+; 1117)
+[2025-03-31T12:02:31.888+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2025-03-31T12:02:31.899+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-03-31T12:07:32.837+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [queued]>
+[2025-03-31T12:07:32.843+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [queued]>
+[2025-03-31T12:07:32.844+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:07:32.844+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2025-03-31T12:07:32.844+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:07:32.852+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): ingest_raw_data> on 2023-01-28 00:00:00+00:00
+[2025-03-31T12:07:32.856+0000] {standard_task_runner.py:55} INFO - Started process 423 to run task
+[2025-03-31T12:07:32.858+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'data_ingestion_pipeline', 'ingest_raw_data', 'scheduled__2023-01-28T00:00:00+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/data_pipeline.py', '--cfg-path', '/tmp/tmpzqukumjg']
+[2025-03-31T12:07:32.859+0000] {standard_task_runner.py:83} INFO - Job 29: Subtask ingest_raw_data
+[2025-03-31T12:07:32.897+0000] {task_command.py:388} INFO - Running <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [running]> on host ab19a3cb7e10
+[2025-03-31T12:07:33.002+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=data_ingestion_pipeline
+AIRFLOW_CTX_TASK_ID=ingest_raw_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-28T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-01-28T00:00:00+00:00
+[2025-03-31T12:07:33.007+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2056, in execute
+    cur.execute(*args, **kwargs)
+psycopg2.errors.UndefinedTable: relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_pipeline.py", line 22, in ingest_raw_data
+    df.to_sql('raw_sales', conn, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/generic.py", line 2882, in to_sql
+    method=method,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 728, in to_sql
+    **engine_kwargs,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2225, in to_sql
+    table.create()
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 856, in create
+    if self.exists():
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 840, in exists
+    return self.pd_sql.has_table(self.name, self.schema)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2236, in has_table
+    return len(self.execute(query, [name]).fetchall()) > 0
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2068, in execute
+    raise ex from exc
+pandas.io.sql.DatabaseError: Execution failed on sql 'SELECT name FROM sqlite_master WHERE type='table' AND name=?;': relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+
+[2025-03-31T12:07:33.012+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=data_ingestion_pipeline, task_id=ingest_raw_data, execution_date=20230128T000000, start_date=20250331T120732, end_date=20250331T120733
+[2025-03-31T12:07:33.018+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 29 for task ingest_raw_data (Execution failed on sql 'SELECT name FROM sqlite_master WHERE type='table' AND name=?;': relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+; 423)
+[2025-03-31T12:07:33.042+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2025-03-31T12:07:33.053+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-03-31T12:34:23.728+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [queued]>
+[2025-03-31T12:34:23.733+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [queued]>
+[2025-03-31T12:34:23.734+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:34:23.734+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2025-03-31T12:34:23.734+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:34:23.742+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): ingest_raw_data> on 2023-01-28 00:00:00+00:00
+[2025-03-31T12:34:23.744+0000] {standard_task_runner.py:55} INFO - Started process 444 to run task
+[2025-03-31T12:34:23.746+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'data_ingestion_pipeline', 'ingest_raw_data', 'scheduled__2023-01-28T00:00:00+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/data_pipeline.py', '--cfg-path', '/tmp/tmpn0p6hn_j']
+[2025-03-31T12:34:23.747+0000] {standard_task_runner.py:83} INFO - Job 30: Subtask ingest_raw_data
+[2025-03-31T12:34:23.784+0000] {task_command.py:388} INFO - Running <TaskInstance: data_ingestion_pipeline.ingest_raw_data scheduled__2023-01-28T00:00:00+00:00 [running]> on host 5504c6a7fee6
+[2025-03-31T12:34:23.886+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=data_ingestion_pipeline
+AIRFLOW_CTX_TASK_ID=ingest_raw_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-28T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2023-01-28T00:00:00+00:00
+[2025-03-31T12:34:23.891+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2056, in execute
+    cur.execute(*args, **kwargs)
+psycopg2.errors.UndefinedTable: relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_pipeline.py", line 22, in ingest_raw_data
+    df.to_sql('raw_sales', conn, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/generic.py", line 2882, in to_sql
+    method=method,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 728, in to_sql
+    **engine_kwargs,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2225, in to_sql
+    table.create()
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 856, in create
+    if self.exists():
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 840, in exists
+    return self.pd_sql.has_table(self.name, self.schema)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2236, in has_table
+    return len(self.execute(query, [name]).fetchall()) > 0
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/sql.py", line 2068, in execute
+    raise ex from exc
+pandas.io.sql.DatabaseError: Execution failed on sql 'SELECT name FROM sqlite_master WHERE type='table' AND name=?;': relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+
+[2025-03-31T12:34:23.897+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=data_ingestion_pipeline, task_id=ingest_raw_data, execution_date=20230128T000000, start_date=20250331T123423, end_date=20250331T123423
+[2025-03-31T12:34:23.902+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 30 for task ingest_raw_data (Execution failed on sql 'SELECT name FROM sqlite_master WHERE type='table' AND name=?;': relation "sqlite_master" does not exist
+LINE 1: SELECT name FROM sqlite_master WHERE type='table' AND name=?...
+                         ^
+; 444)
+[2025-03-31T12:34:23.930+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2025-03-31T12:34:23.941+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

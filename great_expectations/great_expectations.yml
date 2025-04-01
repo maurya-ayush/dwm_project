@@ -1,0 +1,12 @@
+datasources:
+  postgres_datasource:
+    class_name: Datasource
+    execution_engine:
+      class_name: SqlAlchemyExecutionEngine
+      credentials: ${postgres_credentials}
+    data_connectors:
+      default_runtime_data_connector:
+        class_name: RuntimeDataConnector
+      default_inferred_data_connector:
+        class_name: InferredAssetSqlDataConnector
+        name: whole_table

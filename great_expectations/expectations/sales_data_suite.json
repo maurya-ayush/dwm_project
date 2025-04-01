@@ -1,0 +1,43 @@
+{
+    "expectation_suite_name": "sales_data_suite",
+    "expectations": [
+        {
+            "expectation_type": "expect_column_values_to_not_be_null",
+            "kwargs": {
+                "column": "sale_amount"
+            }
+        },
+        {
+            "expectation_type": "expect_column_values_to_be_unique",
+            "kwargs": {
+                "column": "transaction_id"
+            }
+        },
+        {
+            "expectation_type": "expect_column_values_to_be_between",
+            "kwargs": {
+                "column": "sale_amount",
+                "min_value": 0
+            }
+        },
+        {
+            "expectation_type": "expect_column_kl_divergence_to_be_less_than",
+            "kwargs": {
+                "column": "sale_amount",
+                "partition_object": {
+                    "bins": [
+                        0,
+                        100,
+                        200,
+                        300
+                    ],
+                    "weights": [
+                        0.3,
+                        0.5,
+                        0.2
+                    ]
+                }
+            }
+        }
+    ]
+}

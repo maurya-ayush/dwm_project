@@ -1,0 +1,24 @@
+[2025-03-31T12:12:01.798+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_quality_pipeline.extract_load_raw manual__2025-03-31T12:11:55.712463+00:00 [queued]>
+[2025-03-31T12:12:01.804+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_quality_pipeline.extract_load_raw manual__2025-03-31T12:11:55.712463+00:00 [queued]>
+[2025-03-31T12:12:01.804+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:12:01.804+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2025-03-31T12:12:01.804+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:12:01.811+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): extract_load_raw> on 2025-03-31 12:11:55.712463+00:00
+[2025-03-31T12:12:01.815+0000] {standard_task_runner.py:55} INFO - Started process 1935 to run task
+[2025-03-31T12:12:01.817+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'data_quality_pipeline', 'extract_load_raw', 'manual__2025-03-31T12:11:55.712463+00:00', '--job-id', '152', '--raw', '--subdir', 'DAGS_FOLDER/dq_pipeline.py', '--cfg-path', '/tmp/tmpzh99hrrm']
+[2025-03-31T12:12:01.817+0000] {standard_task_runner.py:83} INFO - Job 152: Subtask extract_load_raw
+[2025-03-31T12:12:01.849+0000] {task_command.py:388} INFO - Running <TaskInstance: data_quality_pipeline.extract_load_raw manual__2025-03-31T12:11:55.712463+00:00 [running]> on host ab19a3cb7e10
+[2025-03-31T12:12:01.889+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=data_quality_pipeline
+AIRFLOW_CTX_TASK_ID=extract_load_raw
+AIRFLOW_CTX_EXECUTION_DATE=2025-03-31T12:11:55.712463+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2025-03-31T12:11:55.712463+00:00
+[2025-03-31T12:12:01.891+0000] {logging_mixin.py:137} INFO - Data loaded into raw_sales
+[2025-03-31T12:12:01.891+0000] {python.py:177} INFO - Done. Returned value was: None
+[2025-03-31T12:12:01.897+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=data_quality_pipeline, task_id=extract_load_raw, execution_date=20250331T121155, start_date=20250331T121201, end_date=20250331T121201
+[2025-03-31T12:12:01.917+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2025-03-31T12:12:01.933+0000] {taskinstance.py:2578} INFO - 1 downstream tasks scheduled from follow-on schedule check

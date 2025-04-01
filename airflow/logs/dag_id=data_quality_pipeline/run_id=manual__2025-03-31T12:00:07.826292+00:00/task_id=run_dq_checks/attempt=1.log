@@ -1,0 +1,71 @@
+[2025-03-31T12:00:32.325+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_quality_pipeline.run_dq_checks manual__2025-03-31T12:00:07.826292+00:00 [queued]>
+[2025-03-31T12:00:32.331+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: data_quality_pipeline.run_dq_checks manual__2025-03-31T12:00:07.826292+00:00 [queued]>
+[2025-03-31T12:00:32.331+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:00:32.331+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2025-03-31T12:00:32.331+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2025-03-31T12:00:32.337+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): run_dq_checks> on 2025-03-31 12:00:07.826292+00:00
+[2025-03-31T12:00:32.340+0000] {standard_task_runner.py:55} INFO - Started process 522 to run task
+[2025-03-31T12:00:32.343+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'data_quality_pipeline', 'run_dq_checks', 'manual__2025-03-31T12:00:07.826292+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/dq_pipeline.py', '--cfg-path', '/tmp/tmpox7u3yw0']
+[2025-03-31T12:00:32.343+0000] {standard_task_runner.py:83} INFO - Job 22: Subtask run_dq_checks
+[2025-03-31T12:00:32.375+0000] {task_command.py:388} INFO - Running <TaskInstance: data_quality_pipeline.run_dq_checks manual__2025-03-31T12:00:07.826292+00:00 [running]> on host 1d0e81057fe9
+[2025-03-31T12:00:32.413+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=data_quality_pipeline
+AIRFLOW_CTX_TASK_ID=run_dq_checks
+AIRFLOW_CTX_EXECUTION_DATE=2025-03-31T12:00:07.826292+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2025-03-31T12:00:07.826292+00:00
+[2025-03-31T12:00:32.414+0000] {util.py:2007} INFO - Could not find local context root directory
+[2025-03-31T12:00:32.415+0000] {base.py:2134} INFO - Created temporary directory '/tmp/tmpm70trj61' for ephemeral docs site
+[2025-03-31T12:00:32.416+0000] {abstract_data_context.py:5575} INFO - EphemeralDataContext has not implemented `_load_fluent_config()` returning empty `GxConfig`
+[2025-03-31T12:00:32.416+0000] {config.py:185} INFO - Loading 'datasources' ->
+[]
+[2025-03-31T12:00:32.428+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/store/in_memory_store_backend.py", line 51, in _get
+    return self._store[key]
+KeyError: ('sales_data_checkpoint',)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/store/checkpoint_store.py", line 145, in get_checkpoint
+    checkpoint_config: Optional[Any] = self.get(key=key)
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/store/store.py", line 188, in get
+    value = self._store_backend.get(self.key_to_tuple(key))
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/store/_store_backend.py", line 121, in get
+    value = self._get(key, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/store/in_memory_store_backend.py", line 53, in _get
+    raise InvalidKeyError(f"{str(e)}")
+great_expectations.exceptions.exceptions.InvalidKeyError: ('sales_data_checkpoint',)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dq_pipeline.py", line 41, in run_data_quality_checks
+    checkpoint_name="sales_data_checkpoint"
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/core/usage_statistics/usage_statistics.py", line 318, in usage_statistics_wrapped_method
+    result = func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2288, in run_checkpoint
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2313, in _run_checkpoint
+    id=id,
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/data_context/abstract_data_context.py", line 2163, in get_checkpoint
+    name=name, id=id
+  File "/home/airflow/.local/lib/python3.7/site-packages/great_expectations/data_context/store/checkpoint_store.py", line 151, in get_checkpoint
+    message=f'Non-existent Checkpoint configuration named "{key.configuration_key}".\n\nDetails: {exc_ik}'  # type: ignore[union-attr]
+great_expectations.exceptions.exceptions.CheckpointNotFoundError: Non-existent Checkpoint configuration named "sales_data_checkpoint".
+
+Details: ('sales_data_checkpoint',)
+[2025-03-31T12:00:32.436+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=data_quality_pipeline, task_id=run_dq_checks, execution_date=20250331T120007, start_date=20250331T120032, end_date=20250331T120032
+[2025-03-31T12:00:32.441+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 22 for task run_dq_checks (Non-existent Checkpoint configuration named "sales_data_checkpoint".
+
+Details: ('sales_data_checkpoint',); 522)
+[2025-03-31T12:00:32.480+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2025-03-31T12:00:32.494+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

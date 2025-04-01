@@ -1,0 +1,60 @@
+
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: dq_user
+      POSTGRES_PASSWORD: dq_pass
+      POSTGRES_DB: dq_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d/
+
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile-airflow
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://dq_user:dq_pass@postgres/dq_db
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      SQLALCHEMY_WARN_20: 0
+    command: >
+      bash -c "
+        airflow db init &&
+        airflow users create --username admin --password admin --firstname Air --lastname Flow --role Admin --email admin@example.com &&
+        airflow webserver & airflow scheduler
+      "
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  streamlit:
+    image: python:3.9
+    working_dir: /app
+    command: sh -c "pip install plotly[express] streamlit psycopg2-binary && streamlit run app.py"
+    volumes:
+      - ./streamlit:/app
+    ports:
+      - "8501:8501"
+    depends_on:
+      - postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@dq.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

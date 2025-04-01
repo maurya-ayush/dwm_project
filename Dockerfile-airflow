@@ -1,0 +1,4 @@
+FROM apache/airflow:2.6.0
+USER root
+USER airflow
+RUN pip install great-expectations psycopg2-binary sqlalchemy<2.0.0
